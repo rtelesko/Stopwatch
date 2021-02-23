@@ -64,15 +64,20 @@ public class StopwatchActivity extends Activity {
     }
 
     //Sets the number of seconds on the timer.
+
     private void runTimer() {
-        final TextView timeView = (TextView)findViewById(R.id.time_view);
+        final TextView timeView = (TextView) findViewById(R.id.time_view);
+        /* A Handler is very convenient object to communicate between 2 threads (for instance : a background thread need to update the UI.
+        You can use a Handler to post some Runnable from your background thread to the UI thread).
+        see details: https://guides.codepath.com/android/Repeating-Periodic-Tasks
+        */
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                int hours = seconds/3600;
-                int minutes = (seconds%3600)/60;
-                int secs = seconds%60;
+                int hours = seconds / 3600;
+                int minutes = (seconds % 3600) / 60;
+                int secs = seconds % 60;
                 String time = String.format(Locale.getDefault(),
                         "%d:%02d:%02d", hours, minutes, secs);
                 timeView.setText(time);
